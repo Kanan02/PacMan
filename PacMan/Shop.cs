@@ -11,31 +11,27 @@ namespace PacMan
         public PacmanAbstract[] Pacmans { get; set; }
         public Shop()
         {
-            Pacmans = new Pacman[4]
+            Pacmans = new PacmanAbstract[2]
             {
-               new Pacman(ConsoleColor.Red),
-               new Pacman(ConsoleColor.Green),
-               new Pacman(ConsoleColor.Yellow),
-               new Pacman(ConsoleColor.Blue)
+               new Pacman(50,11,ConsoleColor.Red),
+               new SuperPacman(50,11,ConsoleColor.Green,2),
             };
         }
 
 
-        public ConsoleColor PrintShop()
+        public PacmanAbstract PrintShop()
         {
             Console.WriteLine("Welcome to shop, choose the skin:");
-            for (int i = 0; i < Pacmans.Length; i++)
-            {
-
-                Console.Write($"{i + 1}.");
-                Pacmans[i].PrintSimplePacman();
-                Console.Write('\t');
-
-            }
+            Console.Write($"1.Default(");
+            Pacmans[0].PrintSimplePacman();
+            Console.WriteLine(")");
+            Console.Write($"2.SuperPacman(");
+            Pacmans[1].PrintSimplePacman();
+            Console.WriteLine(")");
             Console.WriteLine();
 
             int choice =Int32.Parse( Console.ReadLine());
-            return Pacmans[choice - 1].SkinColor;
+            return Pacmans[choice - 1];
 
         }
 

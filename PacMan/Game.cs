@@ -15,11 +15,12 @@ namespace PacMan
         #region Ctor
 
        
-        public Game(int nGhosts, int numberOfMilliseconds,bool hasSound,ConsoleColor consoleColor)
+        public Game(int nGhosts, int numberOfMilliseconds,bool hasSound,PacmanAbstract pacman)
         {
             DisplayBoard();
             HasSound = hasSound;
-            Pacman = new Pacman(50, 11,consoleColor);
+
+            Pacman = pacman;
             this.numberOfMilliseconds = numberOfMilliseconds;
             Ghosts = new List<Ghost>(nGhosts);
             for (int i = 0; i < nGhosts; i++)
@@ -61,7 +62,7 @@ namespace PacMan
         public event GameMusic Start;
         
         public event GameMusic Death;
-        public Pacman Pacman { get; set; }
+        public PacmanAbstract Pacman { get; set; }
         public List<Ghost> Ghosts { get; set; }
 
         private char dot = Char.Parse("\u00B7");
@@ -261,7 +262,7 @@ namespace PacMan
 
         public static bool isWall(int top, int left)
         {
-            if (top<1||left==7)
+            if (top<1||left<7||left>90||top>11)
             {
                 return true;
             }
