@@ -52,12 +52,13 @@ namespace PacMan
                 Console.WriteLine($"Welcome back {name}, your best score is {xmlFileHandler.Players.Where(x=>x.Name==name).ElementAt(0).Score}!");
             }
             bool sound = true;
+            ConsoleColor skin = ConsoleColor.Yellow;
             while (true)
             {
 
-                Console.WriteLine("1.Play  2.ScoreBoard 3.Settings 4.Exit");
+                Console.WriteLine("1.Play  2.ScoreBoard 3.Settings 4.Skin Shop 5.Exit");
                 int choice = Int32.Parse(Console.ReadLine());
-
+               
                 if (choice == 1)
                 {
                     Console.WriteLine("1.Easy 2.Medium  3.Hard");
@@ -68,15 +69,15 @@ namespace PacMan
                     Console.SetCursorPosition(0, 0);
                     if (choice2 == 1)
                     {
-                        game = new Game(8, 1000,sound);
+                        game = new Game(8, 1000,sound,skin);
                     }
                     else if (choice2 == 2)
                     {
-                        game = new Game(12, 800,sound);
+                        game = new Game(12, 800,sound,skin);
                     }
                     else
                     {
-                        game = new Game(20, 500,sound);
+                        game = new Game(20, 500,sound,skin);
                     }
                     game.Move();
                     Console.Clear();
@@ -129,9 +130,18 @@ namespace PacMan
                 }
                 else if(choice==4)
                 {
+                    Console.Clear();
+                    Shop shop = new Shop();
+                    skin=shop.PrintShop();
+                    Console.Clear();
+
+                }
+                else if (choice == 5)
+                {
                     Console.WriteLine("Goodbye!");
                     break;
                 }
+
             }
         }
 

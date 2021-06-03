@@ -9,28 +9,33 @@ namespace PacMan
 {
 
 
-    class Pacman 
+    class Pacman :PacmanAbstract
     {
-       
-        public Pacman(int left, int top)
+        public Pacman( ConsoleColor skinColor)
+        {
+            
+            SkinColor = skinColor;
+
+        }
+        public Pacman(int left, int top,ConsoleColor skinColor)
         {
             Left = left;
             Top = top;
             Path = new PacManPath();
-            //Add the first coordinate and eat the dot
             Coordinate c = new Coordinate();
             c.Left = Left;
             c.Top = Top;
             Path.Coordinates.Add(c);
             EatDot();
+            SkinColor = skinColor;
+
         }
         public PacManPath Path { get; set; }
         public int Left { get; set; }
         public int Top { get; set; }
-        private char pacman = '\u263B';
-        
-        public event GameMusic Chomp;
 
+        public event GameMusic Chomp;
+        
         public int Points { get; set; }
    
        
@@ -55,7 +60,6 @@ namespace PacMan
                     left++;
                     break;
 
-
             }
             if (isWall(top,left))
             {
@@ -79,20 +83,30 @@ namespace PacMan
 
         }
 
-        public void PrintPacman()
-        {
-            Console.SetCursorPosition(Left, Top);
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(pacman);
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(Left, Top);
-        }
+       
 
         private void EatDot()
         {
             Points += 20;
             Chomp = PlayMusic;
             Chomp.Invoke("pacman_chomp.wav");
+        }
+
+        public  void PrintPacman()
+        {
+            Console.SetCursorPosition(Left, Top);
+            Console.ForegroundColor = SkinColor;
+            Console.Write(pacman);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(Left, Top);
+        }
+        public override void PrintSimplePacman()
+        {
+            
+            Console.ForegroundColor = SkinColor;
+            Console.Write(pacman);
+            Console.ForegroundColor = ConsoleColor.White;
+
         }
     }
 }

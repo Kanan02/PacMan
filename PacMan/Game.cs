@@ -15,11 +15,11 @@ namespace PacMan
         #region Ctor
 
        
-        public Game(int nGhosts, int numberOfMilliseconds,bool hasSound)
+        public Game(int nGhosts, int numberOfMilliseconds,bool hasSound,ConsoleColor consoleColor)
         {
             DisplayBoard();
             HasSound = hasSound;
-            Pacman = new Pacman(50, 11);
+            Pacman = new Pacman(50, 11,consoleColor);
             this.numberOfMilliseconds = numberOfMilliseconds;
             Ghosts = new List<Ghost>(nGhosts);
             for (int i = 0; i < nGhosts; i++)

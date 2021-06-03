@@ -34,7 +34,7 @@ namespace PacMan
         public string Name { get; set; }
 
         public int Score { get; set; }
-
+        public ConsoleColor Skin { get; set; }
 
     }
 }
